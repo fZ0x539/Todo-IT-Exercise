@@ -1,10 +1,9 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import java.util.Objects;
 
 public class TodoItemTask {
     //Fields
-    private static int referenceId;
     private int id;
     private TodoItem todoItem;
     private Person assignee;
@@ -17,15 +16,29 @@ public class TodoItemTask {
         setAssignee(assignee);
     }
 
+    public TodoItemTask(int id, TodoItem todoItem, Person assignee){
+        this(todoItem);
+        setAssignee(assignee);
+        setId(id);
+    }
+
     public TodoItemTask(TodoItem todoItem){
         setTodoItem(todoItem);
-        id = referenceId++ + 1;
+    }
+
+    public TodoItemTask(int id, TodoItem todoItem){
+        setTodoItem(todoItem);
+        setId(id);
     }
 
     //Getters & Setters
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public boolean isAssigned(){
@@ -54,20 +67,6 @@ public class TodoItemTask {
 
     //Methods
 
-
-//    public StringBuilder getSummary(){
-//        var sb = new StringBuilder();
-//        sb.append("Task Summary -> ")
-//                .append("\nid: ").append(getId())
-//                .append("\nTodoItem: ").append(todoItem.getSummary());
-//            if(isAssigned())
-//                sb.append("\nAssignee: ").append(assignee.getSummary());
-//            else
-//                sb.append("\nIs Assigned?: ").append(isAssigned());
-//
-//            sb.append("\n");
-//        return sb;
-//    }
     @Override
     public String toString() {
         return "TodoItemTask" + "\n" +

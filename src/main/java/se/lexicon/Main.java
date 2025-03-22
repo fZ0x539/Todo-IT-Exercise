@@ -1,5 +1,10 @@
 package se.lexicon;
 
+import se.lexicon.model.AppRole;
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
+import se.lexicon.model.TodoItemTask;
+
 import java.time.LocalDate;
 
 public class Main {
@@ -51,10 +56,7 @@ public class Main {
 //        var itemTask3 = new TodoItemTask(todoItem6, person7);
 //        System.out.println(itemTask3.getSummary());
 
-        System.out.println(person5.hashCode());
-        System.out.println(todoItem5.hashCode());
-        System.out.println(todoItem6.hashCode());
-        System.out.println(itemTask1.hashCode());
+
 
 
 

@@ -1,7 +1,8 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,9 +13,9 @@ public class TestTodoItemTask {
 
     @BeforeEach
     void setUp() {
-        person = new Person("John", "Doe", "john.doe@example.com");
-        todoItem = new TodoItem("Test Task", "This is a test task", LocalDate.now().plusDays(1), person);
-        todoItemTask = new TodoItemTask(todoItem, person);
+        person = new Person(1,"John", "Doe", "john.doe@example.com", "emsweden", "password", AppRole.ROLE_APP_ADMIN);
+        todoItem = new TodoItem(2,"Test Task", "This is a test task", LocalDate.now().plusDays(1), person);
+        todoItemTask = new TodoItemTask(3,todoItem, person);
     }
 
     @Test
@@ -26,7 +27,7 @@ public class TestTodoItemTask {
 
     @Test
     void testSetAssignee() {
-        Person newPerson = new Person("Alice", "Brown", "alice.brown@example.com");
+        Person newPerson = new Person("Alice", "Brown", "alice.brown@example.com", "emsweden", "password", AppRole.ROLE_APP_ADMIN);
         todoItemTask.setAssignee(newPerson);
         assertEquals(newPerson, todoItemTask.getAssignee());
         assertTrue(todoItemTask.isAssigned());
@@ -39,12 +40,4 @@ public class TestTodoItemTask {
         assertEquals(newTodo, todoItemTask.getTodoItem());
     }
 
-    @Test
-    void testGetTodoItemTaskSummary() {
-        String summary = todoItemTask.getSummary().toString();
-        System.out.println(summary);
-        assertTrue(summary.contains("Id: 1"));
-        assertTrue(summary.contains("Title: Test Task"));
-        assertTrue(summary.contains("Name: John Doe"));
-    }
 }

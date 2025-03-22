@@ -1,7 +1,8 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,8 +12,8 @@ class TestTodoItem {
 
     @BeforeEach
     void setUp() {
-        person = new Person("John", "Doe", "john.doe@example.com");
-        todoItem = new TodoItem("Test Task", "This is a test task", LocalDate.now().plusDays(1), person);
+        person = new Person(1,"John", "Doe", "john.doe@example.com", "emsweden", "password", AppRole.ROLE_APP_ADMIN);
+        todoItem = new TodoItem(1,"Test Task", "This is a test task", LocalDate.now().plusDays(1), person);
     }
 
 
@@ -55,11 +56,5 @@ class TestTodoItem {
         assertTrue(overdueItem.isOverdue());
     }
 
-    @Test
-    void testGetTodoSummary() {
-        String summary = todoItem.getSummary().toString();
-        assertTrue(summary.contains("Id: "));
-        assertTrue(summary.contains("Title: Test Task"));
-        assertTrue(summary.contains("Created by: John"));
-    }
+
 }

@@ -1,7 +1,8 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestPerson {
@@ -9,7 +10,7 @@ class TestPerson {
 
     @BeforeEach
     void setUp() {
-        person = new Person("John", "Doe", "john.doe@example.com");
+        person = new Person(1,"John", "Doe", "john.doe@example.com", "emsweden", "password", AppRole.ROLE_APP_ADMIN);
     }
 
     @Test
@@ -38,11 +39,4 @@ class TestPerson {
         assertEquals("jane.smith@example.com", person.getEmail());
     }
 
-    @Test
-    void testGetSummary() {
-        String summary = person.getSummary().toString();
-        assertTrue(summary.contains("Id: "));
-        assertTrue(summary.contains("Name: John Doe"));
-        assertTrue(summary.contains("Email: john.doe@example.com"));
-    }
 }

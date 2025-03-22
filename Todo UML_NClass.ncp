@@ -7,7 +7,7 @@
       <Entity type="Class">
         <Name>Person</Name>
         <Access>Public</Access>
-        <Location left="908" top="529" />
+        <Location left="1972" top="1165" />
         <Size width="326" height="435" />
         <Collapsed>False</Collapsed>
         <Member type="Field">static int referenceId</Member>
@@ -30,7 +30,7 @@
       <Entity type="Class">
         <Name>TodoItem</Name>
         <Access>Public</Access>
-        <Location left="496" top="443" />
+        <Location left="1560" top="1079" />
         <Size width="291" height="426" />
         <Collapsed>False</Collapsed>
         <Member type="Field">static int referenceId</Member>
@@ -58,7 +58,7 @@
       <Entity type="Class">
         <Name>TodoItemTask</Name>
         <Access>Public</Access>
-        <Location left="186" top="508" />
+        <Location left="1250" top="1144" />
         <Size width="241" height="292" />
         <Collapsed>False</Collapsed>
         <Member type="Field">static int referenceId</Member>
@@ -78,7 +78,7 @@
       <Entity type="Class">
         <Name>AppUser</Name>
         <Access>Public</Access>
-        <Location left="934" top="97" />
+        <Location left="2440" top="1398" />
         <Size width="237" height="291" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private String username</Member>
@@ -98,141 +98,192 @@
       <Entity type="Enum">
         <Name>AppRole</Name>
         <Access>Public</Access>
-        <Location left="1392" top="97" />
+        <Location left="2780" top="1413" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Value>ROLE_APP_USER</Value>
         <Value>ROLE_APP_ADMIN</Value>
       </Entity>
+      <Entity type="Interface">
+        <Name>AppUserDAO</Name>
+        <Access>Public</Access>
+        <Location left="31" top="87" />
+        <Size width="262" height="236" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">AppUser persist(AppUser appUser)</Member>
+        <Member type="Method">AppUser findByUsername(String username)</Member>
+        <Member type="Method">ArrayList&lt;AppUser&gt; findAll()</Member>
+        <Member type="Method">void remove(String username)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>PersonDAO</Name>
+        <Access>Public</Access>
+        <Location left="333" top="87" />
+        <Size width="226" height="236" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Person persist(Person person)</Member>
+        <Member type="Method">Person findById(int id)</Member>
+        <Member type="Method">Person findByEmail(String email)</Member>
+        <Member type="Method">ArrayList&lt;Person&gt; findAll()</Member>
+        <Member type="Method">void remove(int id)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>TodoItemDAO</Name>
+        <Access>Public</Access>
+        <Location left="594" top="87" />
+        <Size width="342" height="236" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">TodoItem persist(TodoItem todoItem)</Member>
+        <Member type="Method">TodoItem findById(int id)</Member>
+        <Member type="Method">ArrayList&lt;TodoItem&gt; findAll()</Member>
+        <Member type="Method">ArrayList&lt;TodoItem&gt; findAllByDoneStatus(Status done)</Member>
+        <Member type="Method">ArrayList&lt;TodoItem&gt; findByTitleContains(String title)</Member>
+        <Member type="Method">ArrayList&lt;TodoItem&gt; findByPersonId(int id)</Member>
+        <Member type="Method">ArrayList&lt;TodoItem&gt; findByDeadlineBefore(LocalDate date)</Member>
+        <Member type="Method">ArrayList&lt;TodoItem&gt; findByDeadlineAfter(LocalDate date)</Member>
+        <Member type="Method">void remove(int id)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>TodoItemTaskDAO</Name>
+        <Access>Public</Access>
+        <Location left="993" top="87" />
+        <Size width="368" height="236" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">TodoItemTask persist(TodoItemTask todoItemtask)</Member>
+        <Member type="Method">TodoItemTask findById(int id)</Member>
+        <Member type="Method">ArrayList&lt;TodoItemTask&gt; findByAssignedStatus(Status status)</Member>
+        <Member type="Method">ArrayList&lt;TodoItemTask&gt; findByPersonId(int personId)</Member>
+        <Member type="Method">void remove(int id)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>TodoItemTaskDAOCollection</Name>
+        <Access>Public</Access>
+        <Location left="1037" top="413" />
+        <Size width="273" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ArrayList&lt;TodoItemTask&gt; todoItemTaskList</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TodoItemDAOCollection</Name>
+        <Access>Public</Access>
+        <Location left="659" top="413" />
+        <Size width="216" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ArrayList&lt;TodoItem&gt; todoItemList</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PersonDAOCollection</Name>
+        <Access>Public</Access>
+        <Location left="333" top="413" />
+        <Size width="226" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ArrayList&lt;Person&gt; personList</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AppUserDAOCollection</Name>
+        <Access>Public</Access>
+        <Location left="31" top="413" />
+        <Size width="262" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ArrayList&lt;AppUser&gt; appUserList</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TodoItemTaskIdSequencer</Name>
+        <Access>Public</Access>
+        <Location left="2206" top="278" />
+        <Size width="196" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static int currentId</Member>
+        <Member type="Method">public static int nextId()</Member>
+        <Member type="Method">public static int getCurrentId()</Member>
+        <Member type="Method">public static void setCurrentId(int id)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TodoItemIdSequencer</Name>
+        <Access>Public</Access>
+        <Location left="1983" top="278" />
+        <Size width="196" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static int currentId</Member>
+        <Member type="Method">public static int nextId()</Member>
+        <Member type="Method">public static int getCurrentId()</Member>
+        <Member type="Method">public static void setCurrentId(int id)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PersonIdSequencer</Name>
+        <Access>Public</Access>
+        <Location left="1752" top="278" />
+        <Size width="196" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static int currentId</Member>
+        <Member type="Method">public static int nextId()</Member>
+        <Member type="Method">public static int getCurrentId()</Member>
+        <Member type="Method">public static void setCurrentId(int id)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Association" first="1" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>875</X>
-          <Y>749</Y>
+          <X>1939</X>
+          <Y>1385</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="3" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="0" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>883</X>
-          <Y>940</Y>
+          <X>1947</X>
+          <Y>1576</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>290</X>
-          <Y>837</Y>
+          <X>1354</X>
+          <Y>1473</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="3" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-    </Relationships>
-  </ProjectItem>
-  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
-    <Name>Untitled</Name>
-    <Language>Java</Language>
-    <Entities>
-      <Entity type="Class">
-        <Name>Drink</Name>
-        <Access>Public</Access>
-        <Location left="196" top="730" />
-        <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>Burger</Name>
-        <Access>Public</Access>
-        <Location left="418" top="730" />
-        <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>Fries</Name>
-        <Access>Public</Access>
-        <Location left="633" top="730" />
-        <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>Pizza</Name>
-        <Access>Public</Access>
-        <Location left="849" top="730" />
-        <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>FoodItem</Name>
-        <Access>Public</Access>
-        <Location left="527" top="65" />
-        <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
-        <Member type="Field">private String name</Member>
-        <Member type="Field">private double price</Member>
-        <Member type="Method">public void getInfo()</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
-        <Name>OrderItems</Name>
-        <Access>Public</Access>
-        <Location left="981" top="85" />
-        <Size width="206" height="216" />
-        <Collapsed>False</Collapsed>
-        <Member type="Field">private String orderId</Member>
-        <Member type="Field">private LocalDateTime orderDate</Member>
-        <Member type="Field">private FoodItem[] items</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-    </Entities>
-    <Relationships>
-      <Relationship type="Generalization" first="0" second="4">
+      <Relationship type="Realization" first="9" second="8">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
-      <Relationship type="Generalization" first="1" second="4">
+      <Relationship type="Realization" first="10" second="7">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
-      <Relationship type="Generalization" first="2" second="4">
+      <Relationship type="Realization" first="11" second="6">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
-      <Relationship type="Generalization" first="3" second="4">
+      <Relationship type="Realization" first="12" second="5">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
