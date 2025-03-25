@@ -5,6 +5,7 @@ import se.lexicon.DAO.Impl.TodoDaoImpl;
 import se.lexicon.DB.DBConnection;
 import se.lexicon.Model.Person;
 import se.lexicon.Model.Todo;
+import se.lexicon.View.ConsoleUI;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,36 +28,42 @@ public class Main {
                 Person person2 = new Person("Mikael", "Johnsson");
                 pplDao.create(person2);
 
-                //PeopleDAO
-//                Person person3 = new Person("Daniel", "Mikaelsson");
-//                pplDao.create(person3);
+                ///PeopleDAO
+                ConsoleUI.printWarn("\nPeopleDAO");
+                Person person3 = new Person("Daniel", "Mikaelsson");
+                pplDao.create(person3);
 
 
-//                //PeopleDao.findAll
-//                List<Person> allPeople = pplDao.findAll();
-//                allPeople.forEach(System.out::println);
+                //PeopleDao.findAll
+                ConsoleUI.printInfo("\nPeopleDao.findAll");
+                pplDao.findAll().forEach(System.out::println);
 
 
-//                //PeopleDao.findById
-//                System.out.println("findById: " + pplDao.findById(person1.getId()));
+                //PeopleDao.findById
+                ConsoleUI.printInfo("\nPeopleDao.findById");
+                System.out.println("findById: " + pplDao.findById(person1.getId()));
 
 
-//                //PeopleDao.findBYName
-//                pplDao.findByName("Daniel").forEach(System.out::println);
+                //PeopleDao.findBYName
+                ConsoleUI.printInfo("\nPeopleDao.findByName('Daniel')");
+                pplDao.findByName("Daniel").forEach(System.out::println);
 
 
-//                //PeopleDao.update
-//                person1.setLastName("Carlsson");
-//                pplDao.update(person1);
-//                System.out.println(person1);
+                //PeopleDao.update
+                ConsoleUI.printInfo("\nPeopleDao.update()");
+                person1.setLastName("Carlsson");
+                pplDao.update(person1);
+                System.out.println(person1);
 
 
-//                //PeopleDao.deleteById
-//                pplDao.deleteById(person1.getId());
-//                pplDao.findAll().forEach(System.out::println);
+                //PeopleDao.deleteById
+                ConsoleUI.printInfo("\nPeopleDao.deleteById(person3.getId())");
+                pplDao.deleteById(person3.getId());
+                pplDao.findAll().forEach(System.out::println);
 
 
-                //TodoDAO
+                ///TodoDAO
+                ConsoleUI.printWarn("\nTodoDAO");
                 Todo todo1 = new Todo(
                         "Clean room",
                         "Vacuum the cat hair, organize the book shelf",
@@ -95,46 +102,51 @@ public class Main {
                 todoDao.create(todo3);
 
 //                //findAll
-//                todoDao.findAll().forEach(System.out::println);
+                ConsoleUI.printInfo("\nTodoDAO.findAll()");
+                todoDao.findAll().forEach(System.out::println);
 
 //                //findById
-//                System.out.println(todoDao.findById(1));
+                ConsoleUI.printInfo("\nTodoDAO.findById(1)");
+                System.out.println(todoDao.findById(1));
 
 //                //findByDoneStatus
-//                todoDao.findByDoneStatus(false).forEach(System.out::println);
+                ConsoleUI.printInfo("\nTodoDAO.findByDoneStatus(true)");
+                todoDao.findByDoneStatus(true).forEach(System.out::println);
 
 //                //findByAssignee(int id)
-//                todoDao.findByAssignee(person2.getId()).forEach(System.out::println);
+                ConsoleUI.printInfo("\nTodoDAO.findByAssignee(id)");
+                todoDao.findByAssignee(person2.getId()).forEach(System.out::println);
 
 //                //findByAssignee(Person person)
-//                todoDao.findByAssignee(person1).forEach(System.out::println);
+                ConsoleUI.printInfo("\nTodoDAO.findByAssignee(person1)");
+                todoDao.findByAssignee(person1).forEach(System.out::println);
 
 
-//                //findByUnassignedStatus
-//                todoDao.create(unassignedTodo1);
-//                todoDao.create(unassignedTodo2);
-//                todoDao.findByUnassignedStatus().forEach(System.out::println);
+                //findByUnassignedStatus
+                ConsoleUI.printInfo("\nTodoDAO.findByUnassignedStatus()");
+                Todo todo4 = todoDao.create(unassignedTodo1);
+                Todo todo5 = todoDao.create(unassignedTodo2);
+                todoDao.findByUnassignedStatus().forEach(System.out::println);
 
 
-//                //todoDao.update
-//                todoDao.findAll().forEach(System.out::println);
-//                todo1.setTitle("Clean garage");
-//                todo1 = todoDao.update(todo1);
-//                System.out.println(todo1);
-//                todoDao.findAll().forEach(System.out::println);
+                //todoDao.update
+                ConsoleUI.printInfo("\nTodoDAO.update()");
+                todoDao.findAll().forEach(System.out::println);
+                Person newPersonForUpdate = new Person("Test", "Testsson");
+                pplDao.create(newPersonForUpdate);
+                todo1.setTitle("Clean garage");
+                todo1.setAssignee(newPersonForUpdate);
+                todo1 = todoDao.update(todo1);
+                System.out.println(todo1);
 
 
-                  //todoDao.deleteById
-                  todoDao.findAll().forEach(System.out::println);
-                  todoDao.deleteById(todo1.getId());
-                  todoDao.deleteById(todo3.getId());
-                  todoDao.findAll().forEach(System.out::println);
-
-
-
-
-
-
+                //todoDao.deleteById
+                ConsoleUI.printInfo("\nTodoDAO.deleteById()");
+                todoDao.findAll().forEach(System.out::println);
+                todoDao.deleteById(todo1.getId());
+                todoDao.deleteById(todo2.getId());
+                todoDao.deleteById(todo4.getId());
+                todoDao.findAll().forEach(System.out::println);
 
 
             } catch (SQLException e) {

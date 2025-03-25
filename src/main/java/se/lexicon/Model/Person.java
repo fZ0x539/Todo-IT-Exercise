@@ -56,7 +56,7 @@ public class Person {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                "}\n";
+                "}";
     }
 
     @Override

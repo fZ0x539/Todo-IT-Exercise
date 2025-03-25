@@ -2,6 +2,7 @@ package se.lexicon.DAO.Impl;
 
 import se.lexicon.DAO.iPeople;
 import se.lexicon.Model.Person;
+import se.lexicon.View.ConsoleUI;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class PeopleDaoImpl implements iPeople {
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
-                System.out.println(person.getFirstName() + " " + person.getLastName() + " has been added to the DB.");
+                ConsoleUI.printInfo(person.getFirstName() + " " + person.getLastName() + " has been added to the DB.");
                 try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
                     if (keys.next()) {
                         int firstId = keys.getInt(1);
@@ -46,11 +47,10 @@ public class PeopleDaoImpl implements iPeople {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet rs = preparedStatement.executeQuery();) {
             while (rs.next()) {
-                Person person = new Person(
+                people.add(new Person(
                         rs.getInt("person_id"),
                         rs.getString("first_name"),
-                        rs.getString("last_name"));
-                people.add(person);
+                        rs.getString("last_name")));
             }
         } catch (SQLException e) {
             System.err.println("Error in PeopleDao.findAll(): " + e.getMessage());
@@ -112,10 +112,10 @@ public class PeopleDaoImpl implements iPeople {
             preparedStatement.setInt(3, person.getId());
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
-                System.out.println("Successfully updated Person with ID " + person.getId());
+                ConsoleUI.printSuccess("Successfully updated Person with ID " + person.getId());
                 return person;
             } else {
-                System.out.println("Couldn't find person with ID" + person.getId());
+                ConsoleUI.printError("Couldn't find person with ID" + person.getId());
             }
         } catch (SQLException e) {
             System.err.println("Error in PeopleDao.update() " + e.getMessage());
@@ -130,7 +130,7 @@ public class PeopleDaoImpl implements iPeople {
             preparedStatement.setInt(1, id);
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
-                System.out.println("Successfully deleted person with ID " + id);
+                ConsoleUI.printWarn("Successfully deleted person with ID " + id);
                 return true;
             }
         } catch (SQLException e) {
@@ -140,6 +140,8 @@ public class PeopleDaoImpl implements iPeople {
         return false;
     }
 
+
+    //Only to be used in development in order to ensure all prior records are wiped and AUTO_INCREMENT is reset if autoCommit is set to false
     public void resetTableIfACFalse() {
         try {
             // Check if autoCommit is disabled
@@ -158,7 +160,7 @@ public class PeopleDaoImpl implements iPeople {
             }
             // If autoCommit is already true, do nothing
         } catch (SQLException e) {
-            System.out.println("Error when resetting Person Table: " + e.getMessage());
+            System.err.println("Failed to reset 'person' table: " + e.getMessage());
         }
     }
 }

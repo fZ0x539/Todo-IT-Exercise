@@ -12,6 +12,7 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
 -- -----------------------------------------------------
 -- Schema todoit
 -- -----------------------------------------------------
+DROP DATABASE todoit;
 CREATE SCHEMA IF NOT EXISTS `todoit` DEFAULT CHARACTER SET utf8;
 -- -----------------------------------------------------
 -- Schema todoit
@@ -56,3 +57,12 @@ CREATE TABLE IF NOT EXISTS `todoit`.`todo_item`
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
+
+
+#Truncate Person Table and reset AUTO_INCREMENT
+SET SQL_SAFE_UPDATES = 0; -- Disable safe update mode
+DELETE
+FROM `todoit`.`person`; -- Delete all rows
+SET SQL_SAFE_UPDATES = 1; -- Re-enable safe update mode
+ALTER TABLE todoit.person
+    AUTO_INCREMENT = 1;
